@@ -7,7 +7,11 @@ import {ProductItem} from "../shared/interfaces";
 export class CartService {
   cartItems: ProductItem[] = [];
 
-  constructor() { }
+  constructor() {
+    if (!JSON.parse(localStorage.getItem('cart'))) {
+      localStorage.setItem('cart', JSON.stringify(this.cartItems));
+    }
+  }
 
   addToCart(item: ProductItem) {
     if (this.getCartItemById(item.id) === undefined) {

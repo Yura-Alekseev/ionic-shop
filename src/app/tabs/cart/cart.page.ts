@@ -25,6 +25,7 @@ export class CartPage implements OnInit, ViewWillEnter {
   ionViewWillEnter() {
     this.isFetching = true;
     this.cartList = this.cartService.getAllCartItems();
+    console.log(this.cartList);
     this.getCartTotal();
     this.isFetching = false;
   }
@@ -42,8 +43,10 @@ export class CartPage implements OnInit, ViewWillEnter {
 
   getCartTotal() {
     this.cartSum = 0;
-    this.cartList.forEach(item => {
-      this.cartSum += item.price;
-    })
+    if (this.cartList !== []) {
+      this.cartList.forEach(item => {
+        this.cartSum += item.price;
+      })
+    }
   }
 }

@@ -15,9 +15,7 @@
     <ion-row>
       <ion-col>
         <ion-list>
-          <ion-item *ngFor="let item of cartList"
-
-          >
+          <ion-item *ngFor="let item of cartList">
             <ion-thumbnail slot="start" [routerLink]="['/', 'products', item.id]">
               <ion-img [src]="item.img"></ion-img>
             </ion-thumbnail>

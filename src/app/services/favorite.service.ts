@@ -7,7 +7,11 @@ import {ProductItem} from "../shared/interfaces";
 export class FavoriteService {
   favoriteItems: ProductItem[] = [];
 
-  constructor() { }
+  constructor() {
+    if (!JSON.parse(localStorage.getItem('favorites'))) {
+      localStorage.setItem('favorites', JSON.stringify(this.favoriteItems));
+    }
+  }
 
   addToFavorite(item: ProductItem) {
     if (this.getFavoriteById(item.id) === undefined) {
