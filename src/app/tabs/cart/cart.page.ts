@@ -26,7 +26,6 @@ export class CartPage implements OnInit, ViewWillEnter {
     this.isFetching = true;
     this.cartList = this.cartService.getAllCartItems();
     this.getCartTotal();
-    console.log(this.cartList);
     this.isFetching = false;
   }
 

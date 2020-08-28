@@ -64,9 +64,12 @@
             <ion-icon *ngIf="inFavorite" slot="end" name="star"></ion-icon>
           </ion-button>
 
-          <ion-button color="primary" expand="block" fill="solid">
-            <ion-label>Add to Cart</ion-label>
-            <ion-icon slot="end" name="basket-outline"></ion-icon>
+          <ion-button color="primary" expand="block" fill="solid" (click)="addToCart(); isInCart()">
+            <ion-label *ngIf="!inCart">Add to Cart</ion-label>
+            <ion-icon *ngIf="!inCart" slot="end" name="basket-outline"></ion-icon>
+
+            <ion-label *ngIf="inCart">In Cart</ion-label>
+            <ion-icon *ngIf="inCart" slot="end" name="basket"></ion-icon>
           </ion-button>
         </ion-buttons>
       </ion-col>

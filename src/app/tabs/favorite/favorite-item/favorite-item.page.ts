@@ -6,6 +6,7 @@ import {ActivatedRoute, Params} from "@angular/router";
 import {ProductsService} from "../../../services/products.service";
 import {FavoriteService} from "../../../services/favorite.service";
 import {switchMap} from "rxjs/operators";
+import {CartService} from "../../../services/cart.service";
 
 @Component({
   selector: 'app-favorite-item',
@@ -17,12 +18,14 @@ export class FavoriteItemPage implements ViewWillEnter, ViewWillLeave {
   prSubs: Subscription;
   isFetching = false;
   inFavorite = false;
+  inCart = false;
 
   constructor(
       private route: ActivatedRoute,
       private navCtrl: NavController,
       private productsService: ProductsService,
-      private favoriteService: FavoriteService
+      private favoriteService: FavoriteService,
+      private cartService: CartService
   ) { }
 
 
@@ -35,6 +38,7 @@ export class FavoriteItemPage implements ViewWillEnter, ViewWillLeave {
     ).subscribe((item: ProductItem) => {
       this.favoriteItem = item;
       this.inFavorite = this.favoriteService.getFavoriteById(item.id) !== undefined;
+      this.inCart = this.cartService.getCartItemById(this.favoriteItem.id) !== undefined;
       this.isFetching = false;
     });
   }
@@ -51,5 +55,13 @@ export class FavoriteItemPage implements ViewWillEnter, ViewWillLeave {
 
   isFavorite() {
     this.inFavorite = this.favoriteService.getFavoriteById(this.favoriteItem.id) !== undefined;
+  }
+
+  addToCart() {
+    this.cartService.addToCart(this.favoriteItem);
+  }
+
+  isInCart() {
+    this.inCart = this.cartService.getCartItemById(this.favoriteItem.id) !== undefined;
   }
 }

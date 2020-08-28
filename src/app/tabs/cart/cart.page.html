@@ -11,7 +11,7 @@
   <p *ngIf="isFetching" class="ion-text-center">Loading...</p>
 
   <p *ngIf="cartList.length === 0" class="ion-margin ion-text-center">Nothing here yet</p>
-  <ion-grid *ngIf="!isFetching || cartList">
+  <ion-grid *ngIf="!isFetching && cartList.length > 0">
     <ion-row>
       <ion-col>
         <ion-list>
