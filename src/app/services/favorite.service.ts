@@ -5,13 +5,9 @@ import {ProductItem} from "../shared/interfaces";
   providedIn: 'root'
 })
 export class FavoriteService {
-  favoriteItems: ProductItem[] = [];
+  favoriteItems: ProductItem[];
 
-  constructor() {
-    if (!JSON.parse(localStorage.getItem('favorites'))) {
-      localStorage.setItem('favorites', JSON.stringify(this.favoriteItems));
-    }
-  }
+  constructor() {}
 
   addToFavorite(item: ProductItem) {
     if (this.getFavoriteById(item.id) === undefined) {
@@ -37,6 +33,11 @@ export class FavoriteService {
   }
 
   getAllFavorites() {
-    return JSON.parse(localStorage.getItem('favorites'));
+    if (JSON.parse(localStorage.getItem('favorites')) !== null) {
+      return JSON.parse(localStorage.getItem('favorites'));
+    } else {
+      localStorage.setItem('favorites', JSON.stringify([]));
+      return JSON.parse(localStorage.getItem('favorites'));
+    }
   }
 }

@@ -5,13 +5,9 @@ import {ProductItem} from "../shared/interfaces";
   providedIn: 'root'
 })
 export class CartService {
-  cartItems: ProductItem[] = [];
+  cartItems: ProductItem[];
 
-  constructor() {
-    if (!JSON.parse(localStorage.getItem('cart'))) {
-      localStorage.setItem('cart', JSON.stringify(this.cartItems));
-    }
-  }
+  constructor() {}
 
   addToCart(item: ProductItem) {
     if (this.getCartItemById(item.id) === undefined) {
@@ -37,7 +33,12 @@ export class CartService {
   }
 
   getAllCartItems() {
-    return JSON.parse(localStorage.getItem('cart'));
+    if (JSON.parse(localStorage.getItem('cart')) !== null) {
+      return JSON.parse(localStorage.getItem('cart'));
+    } else {
+      localStorage.setItem('cart', JSON.stringify([]));
+      return JSON.parse(localStorage.getItem('cart'));
+    }
   }
 
   removeCartItemById(id: string) {
