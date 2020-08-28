@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-md="6" offset-md="3">
+          <ion-list>
+            <ion-item class="validation ion-no-padding" *ngIf="errorMessage" lines="none">
+              <ion-label>{{errorMessage}}</ion-label>
+            </ion-item>
+
+
+            <ion-item class="validation ion-no-padding" *ngIf="auth.error$ | async as error" lines="none">
+              <ion-label>{{error}}</ion-label>
+            </ion-item>
+
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating">E-mail</ion-label>
+              <ion-input type="email" name="email" required formControlName="email"></ion-input>
+            </ion-item>
+
+            <ion-item class="validation ion-no-padding" *ngIf="form.get('email').invalid && form.get('email').touched" lines="none">
+              <ion-label *ngIf="form.get('email').errors.email">Should be a valid email address.</ion-label>
+              <ion-label *ngIf="form.get('email').errors.required">Enter an email.</ion-label>
+            </ion-item>
+
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating">Password</ion-label>
+              <ion-input type="password" name="password" required clearOnEdit="false" formControlName="password"></ion-input>
+            </ion-item>
+
+            <ion-item class="validation ion-no-padding" *ngIf="form.get('password').invalid && form.get('password').touched" lines="none">
+              <ion-label *ngIf="form.get('password').errors.minlength">Should at least be {{ form.get('password').errors.minlength.requiredLength }} characters long.</ion-label>
+              <ion-label *ngIf="form.get('password').errors.required">Enter a password.</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-button type="submit" color="primary" expand="block" [disabled]="form.invalid || submitted">Login</ion-button>
+          <ion-button type="button" color="primary" fill="clear" expand="block" (click)="onSwitchSignup()">Don't have an account? Sign Up</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
+</ion-content>

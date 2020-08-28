@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/favorite"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{favoriteItem?.title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <p *ngIf="isFetching" class="ion-text-center">Loading...</p>
+
+  <ion-grid *ngIf="!isFetching">
+    <ion-row>
+      <ion-col>
+        <ion-img [src]="favoriteItem?.img" alt="{{favoriteItem?.title}}"></ion-img>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <p>{{ favoriteItem?.description }}</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-text>Color: </ion-text>
+      </ion-col>
+
+      <ion-col>
+        <ion-text>{{ favoriteItem?.color }}</ion-text>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-text>Memory: </ion-text>
+      </ion-col>
+
+      <ion-col>
+        <ion-text>{{ favoriteItem?.memory }}GB</ion-text>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-text>Price: </ion-text>
+      </ion-col>
+
+      <ion-col>
+        <ion-text>{{ favoriteItem?.price }}$</ion-text>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-buttons class="ion-justify-content-between">
+          <ion-button color="primary" expand="block" fill="solid" (click)="addToFavorite(); isFavorite()">
+            <ion-label *ngIf="!inFavorite">Add to Favorite</ion-label>
+            <ion-icon *ngIf="!inFavorite" slot="end" name="star-outline"></ion-icon>
+
+            <ion-label *ngIf="inFavorite">In Favorite</ion-label>
+            <ion-icon *ngIf="inFavorite" slot="end" name="star"></ion-icon>
+          </ion-button>
+
+          <ion-button color="primary" expand="block" fill="solid">
+            <ion-label>Add to Cart</ion-label>
+            <ion-icon slot="end" name="basket-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

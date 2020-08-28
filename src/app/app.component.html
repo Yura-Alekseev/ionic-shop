@@ -1,3 +1,57 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu side="start">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Shopping</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle>
+          <ion-item lines="none" routerLink="/personal-account">
+            <ion-icon name="person-outline" slot="start"></ion-icon>
+            <ion-label>Profile</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle *ngIf="!auth.isAuthenticated()">
+          <ion-item lines="none" routerLink="/login">
+            <ion-icon name="enter-outline" slot="start"></ion-icon>
+            <ion-label>Sign In</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle *ngIf="auth.isAuthenticated()">
+          <ion-item lines="none" (click)="onLogout()" button>
+            <ion-icon name="exit-outline" slot="start"></ion-icon>
+            <ion-label>Logout</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet main>
+    <ion-content>
+      <ion-tabs>
+        <ion-tab-bar slot="bottom">
+          <ion-tab-button tab="products">
+            <ion-label>Products</ion-label>
+            <ion-icon name="pricetags-outline"></ion-icon>
+          </ion-tab-button>
+
+          <ion-tab-button tab="favorite">
+            <ion-label>Favorite</ion-label>
+            <ion-icon name="star-outline"></ion-icon>
+          </ion-tab-button>
+
+          <ion-tab-button tab="cart">
+            <ion-label>Cart</ion-label>
+            <ion-icon name="basket-outline"></ion-icon>
+          </ion-tab-button>
+        </ion-tab-bar>
+      </ion-tabs>
+    </ion-content>
+  </ion-router-outlet>
 </ion-app>

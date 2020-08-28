@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Cart</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <p *ngIf="isFetching" class="ion-text-center">Loading...</p>
+
+  <p *ngIf="cartList.length === 0" class="ion-margin ion-text-center">Nothing here yet</p>
+  <ion-grid *ngIf="!isFetching || cartList">
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item *ngFor="let item of cartList"
+
+          >
+            <ion-thumbnail slot="start" [routerLink]="['/', 'products', item.id]">
+              <ion-img [src]="item.img"></ion-img>
+            </ion-thumbnail>
+
+            <div class="cart-item__left">
+              <div class="cart-item__row">
+                <ion-label>
+                  <h2>{{ item.title }}</h2>
+                </ion-label>
+
+                <ion-label class="ion-text-right">
+                  <h2>{{ item.price }}$</h2>
+                </ion-label>
+              </div>
+
+              <!--<div class="cart-item__row">
+                <ion-text>Count: </ion-text>
+
+                <ion-label class="cart-item__counter ion-text-right">
+                  <ion-button fill="clear" color="medium">
+                    <ion-icon name="remove-circle-outline"></ion-icon>
+                  </ion-button>
+                  <ion-text>1</ion-text>
+                  <ion-button fill="clear" color="medium">
+                    <ion-icon name="add-circle-outline"></ion-icon>
+                  </ion-button>
+                </ion-label>
+              </div>-->
+            </div>
+
+
+            <div class="cart-item__right">
+              <ion-button fill="clear" color="danger" (click)="removeItem(item.id)">
+                <ion-icon name="close-circle-outline"></ion-icon>
+              </ion-button>
+            </div>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-text-right">
+      <ion-col size="3" offset="5">
+        <ion-text>Total: </ion-text>
+      </ion-col>
+
+      <ion-col size="4">
+        <ion-text>{{cartSum}}$</ion-text>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-buttons class="ion-justify-content-between">
+          <ion-button color="danger" expand="block" fill="solid" (click)="clearCart()">
+            <ion-label>Clear</ion-label>
+            <ion-icon slot="end" name="trash-outline"></ion-icon>
+          </ion-button>
+
+          <ion-button color="primary" expand="block" fill="solid">
+            <ion-label>Checkout</ion-label>
+            <ion-icon slot="end" name="card-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
