@@ -23,7 +23,6 @@ export class FavoritePage implements OnInit, ViewWillEnter {
   ionViewWillEnter() {
     this.isFetching = true;
     this.favoritesList = this.favoriteService.getAllFavorites();
-    console.log(this.favoritesList);
     this.isFetching = false;
   }
 
