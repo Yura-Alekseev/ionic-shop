@@ -53,4 +53,18 @@ export class RegisterPage implements OnInit {
       this.submitted = false;
     });
   }
+
+  doGoogleAuth() {
+    this.auth.doGoogleAuth().then(() => {
+          this.router.navigate(['/personal-account']);
+        }, err => console.log(err)
+    );
+  }
+
+  doFacebookAuth() {
+    this.auth.doFacebookAuth().then(() => {
+          this.router.navigate(['/personal-account']);
+        }, err => console.log(err)
+    );
+  }
 }

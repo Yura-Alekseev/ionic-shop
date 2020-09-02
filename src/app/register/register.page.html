@@ -44,9 +44,25 @@
       <ion-row>
         <ion-col size-sm="6" offset-sm="3">
           <ion-button type="submit" color="primary" expand="block" [disabled]="form.invalid || submitted">Sign Up</ion-button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size-sm="3" offset-sm="3">
+          <ion-button type="button" color="danger" expand="block" (click)="doGoogleAuth()">Google</ion-button>
+        </ion-col>
+
+        <ion-col size-sm="3">
+          <ion-button type="button" color="primary" expand="block" (click)="doFacebookAuth()">Facebook</ion-button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
           <ion-button type="button" color="primary" fill="clear" expand="block" (click)="onSwitchSignin()">Already have an account? Sign In</ion-button>
         </ion-col>
       </ion-row>
+
     </ion-grid>
   </form>
 
