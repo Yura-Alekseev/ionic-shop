@@ -1,12 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProductsService} from "../../../services/products.service";
 import {ProductItem} from "../../../shared/interfaces";
-import {ActivatedRoute, Params} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 import {NavController, ViewWillEnter, ViewWillLeave} from "@ionic/angular";
 import {switchMap} from "rxjs/operators";
 import {Subscription} from "rxjs";
 import {FavoriteService} from "../../../services/favorite.service";
 import {CartService} from "../../../services/cart.service";
+import {AuthService} from "../../../auth/auth.service";
 
 @Component({
   selector: 'app-product-item',
@@ -22,10 +23,12 @@ export class ProductItemPage implements OnInit, ViewWillLeave, ViewWillEnter {
 
   constructor(
       private route: ActivatedRoute,
+      private router: Router,
       private navCtrl: NavController,
       private productsService: ProductsService,
       private favoriteService: FavoriteService,
-      private cartService: CartService
+      private cartService: CartService,
+      private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -63,7 +66,11 @@ export class ProductItemPage implements OnInit, ViewWillLeave, ViewWillEnter {
   }
 
   addToFavorite() {
-    this.favoriteService.addToFavorite(this.productItem);
+    if (this.authService.isAuthenticated()) {
+      this.favoriteService.addToFavorite(this.productItem);
+    } else {
+      this.router.navigateByUrl('/login');
+    }
   }
 
   isFavorite() {
@@ -71,7 +78,11 @@ export class ProductItemPage implements OnInit, ViewWillLeave, ViewWillEnter {
   }
 
   addToCart() {
-    this.cartService.addToCart(this.productItem);
+    if (this.authService.isAuthenticated()) {
+      this.cartService.addToCart(this.productItem);
+    } else {
+      this.router.navigateByUrl('/login');
+    }
   }
 
   isInCart() {

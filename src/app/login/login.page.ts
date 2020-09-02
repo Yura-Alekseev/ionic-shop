@@ -39,6 +39,20 @@ export class LoginPage implements OnInit {
     this.navCtrl.navigateForward(['/register'], {animated:false});
   }
 
+  doGoogleAuth() {
+    this.auth.doGoogleAuth().then(() => {
+          this.router.navigate(['/personal-account']);
+        }, err => console.log(err)
+    );
+  }
+
+  doFacebookAuth() {
+    this.auth.doFacebookAuth().then(() => {
+          this.router.navigate(['/personal-account']);
+        }, err => console.log(err)
+    );
+  }
+
   onSubmit() {
     if (this.form.invalid) {
       return;

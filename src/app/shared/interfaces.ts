@@ -9,6 +9,20 @@ export interface FbAuthResponse {
     expiresIn: string;
 }
 
+export interface GoogleAuthResponse {
+    credential: {
+        idToken?: string;
+    };
+    returnSecureToken?: boolean;
+}
+
+export interface FacebookAuthResponse {
+    credential: {
+        accessToken?: string;
+    };
+    returnSecureToken?: boolean;
+}
+
 export interface ProductItem {
     img: string;
     price: number;
