@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ProductsService} from "../../services/products.service";
 import {ProductItem} from "../../shared/interfaces";
 import {Subscription} from "rxjs";
@@ -13,6 +13,7 @@ export class ProductsPage implements OnInit, ViewWillLeave {
   productsList: ProductItem[];
   prSubs: Subscription;
   isFetching = false;
+  searchStr = '';
 
   constructor(private productsService: ProductsService) { }
 

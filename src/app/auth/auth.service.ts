@@ -61,8 +61,10 @@ export class AuthService {
       firebase.auth()
           .signInWithPopup(provider)
           .then((response) => {
+            console.log(response);
+            localStorage.setItem('userName', response.user.displayName);
+            localStorage.setItem('userPhoto', response.user.photoURL);
             this.setTokenGoogle(response);
-            localStorage.setItem('userName', response.user.email);
             resolve(response);
           }, err => {
             reject(err);
@@ -77,8 +79,10 @@ export class AuthService {
       firebase.auth()
           .signInWithPopup(provider)
           .then((response) => {
-            this.setTokenFacebook(response);
+            console.log(response);
             localStorage.setItem('userName', response.user.displayName);
+            localStorage.setItem('userPhoto', response.user.photoURL);
+            this.setTokenFacebook(response);
             resolve(response);
           }, err => {
             reject(err);
@@ -99,7 +103,9 @@ export class AuthService {
       localStorage.removeItem('fb-token');
       localStorage.removeItem('userName');
       localStorage.removeItem('cart');
+      localStorage.removeItem('userPhoto');
     }
+
   }
 
   private setTokenGoogle(response: GoogleAuthResponse | null) {
@@ -109,6 +115,7 @@ export class AuthService {
       localStorage.removeItem('fb-token');
       localStorage.removeItem('userName');
       localStorage.removeItem('cart');
+      localStorage.removeItem('userPhoto');
     }
   }
 
@@ -119,6 +126,7 @@ export class AuthService {
       localStorage.removeItem('fb-token');
       localStorage.removeItem('userName');
       localStorage.removeItem('cart');
+      localStorage.removeItem('userPhoto');
     }
   }
 

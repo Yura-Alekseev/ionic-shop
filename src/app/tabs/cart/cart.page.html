@@ -8,7 +8,10 @@
 </ion-header>
 
 <ion-content>
-  <p *ngIf="isFetching" class="ion-text-center">Loading...</p>
+  <!--<p *ngIf="isFetching" class="ion-text-center">Loading...</p>-->
+  <div class="spinner-wrapper">
+    <ion-spinner name="lines" *ngIf="isFetching"></ion-spinner>
+  </div>
 
   <p *ngIf="cartList.length === 0" class="ion-margin ion-text-center">Nothing here yet</p>
   <ion-grid *ngIf="!isFetching && cartList.length > 0">

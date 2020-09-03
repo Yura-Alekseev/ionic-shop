@@ -7,14 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ProductsPageRoutingModule } from './products-routing.module';
 
 import { ProductsPage } from './products.page';
+import {SearchPipe} from "../../shared/search.pipe";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    ProductsPageRoutingModule
-  ],
-  declarations: [ProductsPage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        ProductsPageRoutingModule
+    ],
+  declarations: [ProductsPage, SearchPipe]
 })
 export class ProductsPageModule {}

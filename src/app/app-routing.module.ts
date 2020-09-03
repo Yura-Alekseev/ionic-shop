@@ -37,11 +37,18 @@ const routes: Routes = [
   },
   {
     path: 'product-item',
-    loadChildren: () => import('./tabs/products/product-item/product-item.module').then(m => m.ProductItemPageModule)
+    loadChildren: () => import('./tabs/products/product-item/product-item.module').then(m => m.ProductItemPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'favorite-item',
-    loadChildren: () => import('./tabs/favorite/favorite-item/favorite-item.module').then(m => m.FavoriteItemPageModule)
+    loadChildren: () => import('./tabs/favorite/favorite-item/favorite-item.module').then(m => m.FavoriteItemPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: '**',
+    redirectTo: 'products',
+    pathMatch: 'full'
   },
 ];
 

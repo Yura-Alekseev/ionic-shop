@@ -8,13 +8,22 @@
 </ion-header>
 
 <ion-content>
-  <p *ngIf="isFetching" class="ion-text-center">Loading...</p>
+  <!--<p *ngIf="isFetching" class="ion-text-center">Loading...</p>-->
+  <div class="spinner-wrapper">
+    <ion-spinner name="lines" *ngIf="isFetching"></ion-spinner>
+  </div>
 
   <ion-grid *ngIf="!isFetching">
     <ion-row>
       <ion-col>
+        <ion-searchbar [(ngModel)]="searchStr"></ion-searchbar>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
         <ion-list>
-          <ion-item *ngFor="let item of productsList"
+          <ion-item *ngFor="let item of productsList | searchProducts: searchStr"
                     [routerLink]="['/', 'products', item.id]"
                     detail
           >
