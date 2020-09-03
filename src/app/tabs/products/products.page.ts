@@ -14,6 +14,7 @@ export class ProductsPage implements OnInit, ViewWillLeave {
   prSubs: Subscription;
   isFetching = false;
   searchStr = '';
+  highPrice = true;
 
   constructor(private productsService: ProductsService) { }
 
@@ -21,6 +22,7 @@ export class ProductsPage implements OnInit, ViewWillLeave {
     this.isFetching = true;
     this.prSubs = this.productsService.getAllProducts().subscribe((items) => {
       this.productsList = items;
+      this.sortByPrice();
       this.isFetching = false;
     });
   }
@@ -28,6 +30,19 @@ export class ProductsPage implements OnInit, ViewWillLeave {
   ionViewWillLeave() {
     if (this.prSubs) {
       this.prSubs.unsubscribe();
+    }
+  }
+
+  sortByPrice() {
+    this.highPrice = !this.highPrice;
+    if (this.highPrice === false) {
+      this.productsList.sort((a, b) => {
+        return (a.price - b.price);
+      })
+    } else {
+      this.productsList.sort((a, b) => {
+        return (b.price - a.price);
+      })
     }
   }
 }
