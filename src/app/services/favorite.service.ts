@@ -15,7 +15,7 @@ export class FavoriteService {
       localStorage.setItem('favorites', JSON.stringify(this.favoriteItems));
     } else {
       localStorage.setItem('favorites', null);
-      this.favoriteItems =  this.removeFavoriteById(item.id);
+      this.favoriteItems =  this.filterFavoriteById(item.id);
       localStorage.setItem('favorites', JSON.stringify(this.favoriteItems));
       this.getFavoriteById(item.id);
     }
@@ -28,8 +28,15 @@ export class FavoriteService {
     }
   }
 
-  removeFavoriteById(id: string) {
+  filterFavoriteById(id: string) {
     return this.favoriteItems.filter( i => i.id !== id);
+  }
+
+  removeFavoriteItemById(id: string) {
+    this.favoriteItems = this.getAllFavorites();
+    this.favoriteItems = this.favoriteItems.filter( i => i.id !== id);
+    localStorage.setItem('favorites', JSON.stringify(this.favoriteItems));
+    return this.favoriteItems;
   }
 
   getAllFavorites() {

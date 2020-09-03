@@ -4,3 +4,18 @@
   align-items: center;
   width: 100%;
 }
+
+.favorite-item__left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 80%;
+}
+
+.favorite-item__right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: auto;
+}
+

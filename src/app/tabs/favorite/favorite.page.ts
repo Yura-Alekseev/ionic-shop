@@ -26,4 +26,9 @@ export class FavoritePage implements OnInit, ViewWillEnter {
     this.isFetching = false;
   }
 
+  removeItem(id: string) {
+    this.favoritesList = this.favoriteService.removeFavoriteItemById(id);
+  }
+
+
 }

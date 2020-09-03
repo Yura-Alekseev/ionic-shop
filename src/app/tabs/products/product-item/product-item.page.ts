@@ -53,7 +53,7 @@ export class ProductItemPage implements OnInit, ViewWillLeave, ViewWillEnter {
         })
     ).subscribe((item: ProductItem) => {
       this.productItem = item;
-      this.inFavorite = this.favoriteService.getFavoriteById(item.id) !== undefined;
+      this.inFavorite = this.favoriteService.getFavoriteById(this.productItem.id) !== undefined;
       this.inCart = this.cartService.getCartItemById(this.productItem.id) !== undefined;
       this.isFetching = false;
     });

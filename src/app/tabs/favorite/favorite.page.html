@@ -13,23 +13,28 @@
     <ion-spinner name="lines" *ngIf="isFetching"></ion-spinner>
   </div>
 
-
   <p *ngIf="favoritesList.length === 0" class="ion-margin ion-text-center">Nothing here yet</p>
+
   <ion-grid *ngIf="!isFetching && favoritesList.length > 0">
     <ion-row>
       <ion-col>
         <ion-list>
-          <ion-item *ngFor="let item of favoritesList"
-                    [routerLink]="['/', 'favorite', item.id]"
-                    detail
-          >
-            <ion-thumbnail slot="start">
+          <ion-item *ngFor="let item of favoritesList">
+            <ion-thumbnail slot="start" [routerLink]="['/', 'favorite', item.id]">
               <ion-img [src]="item.img"></ion-img>
             </ion-thumbnail>
 
-            <ion-label>
-              <h2>{{ item.title }}</h2>
-            </ion-label>
+            <div class="favorite-item__left">
+              <ion-label>
+                <h2>{{ item.title }}</h2>
+              </ion-label>
+            </div>
+
+            <div class="favorite-item__right">
+              <ion-button fill="clear" color="danger" (click)="removeItem(item.id)">
+                <ion-icon name="close-circle-outline"></ion-icon>
+              </ion-button>
+            </div>
           </ion-item>
         </ion-list>
       </ion-col>
