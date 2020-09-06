@@ -46,6 +46,26 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'admin-page',
+    loadChildren: () => import('./admin/admin-page/admin-page.module').then(m => m.AdminPagePageModule)
+  },
+  {
+    path: 'admin-login',
+    loadChildren: () => import('./admin/admin-login/admin-login.module').then(m => m.AdminLoginPageModule)
+  },
+  {
+    path: 'edit-post',
+    loadChildren: () => import('./admin/edit-post/edit-post.module').then(m => m.EditPostPageModule)
+  },
+  {
+    path: 'create-post',
+    loadChildren: () => import('./admin/create-post/create-post.module').then(m => m.CreatePostPageModule)
+  },
+  {
+    path: 'post',
+    loadChildren: () => import('./admin/post/post.module').then(m => m.PostPageModule)
+  },
+  {
     path: '**',
     redirectTo: 'products',
     pathMatch: 'full'

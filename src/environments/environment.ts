@@ -14,8 +14,7 @@ export const environment: Environment = {
     storageBucket: "ionic-shop-8b704.appspot.com",
     messagingSenderId: "709415589767",
     appId: "1:709415589767:web:806831c863424f38492522"
-  },
-  fbDbUrl: 'https://ionic-shop-8b704.firebaseio.com'
+  }
 };
 
 /*

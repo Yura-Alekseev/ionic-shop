@@ -8,10 +8,17 @@
 
     <ion-content>
       <ion-list>
-        <ion-menu-toggle *ngIf="auth.isAuthenticated()">
+        <ion-menu-toggle *ngIf="auth.isAuthenticated() && !auth.isAdmin()">
           <ion-item lines="none" routerLink="/personal-account">
             <ion-icon name="person-outline" slot="start"></ion-icon>
             <ion-label>Profile</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle *ngIf="auth.isAuthenticated() && auth.isAdmin()">
+          <ion-item lines="none" routerLink="/admin-page">
+            <ion-icon name="person-outline" slot="start"></ion-icon>
+            <ion-label>Admin Page</ion-label>
           </ion-item>
         </ion-menu-toggle>
 

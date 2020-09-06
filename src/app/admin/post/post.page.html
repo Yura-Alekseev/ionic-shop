@@ -1,0 +1,75 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/admin-page"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{productItem?.title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!--<p *ngIf="isFetching" class="ion-text-center">Loading...</p>-->
+  <div class="spinner-wrapper">
+    <ion-spinner name="lines" *ngIf="isFetching"></ion-spinner>
+  </div>
+
+  <ion-grid *ngIf="!isFetching">
+    <ion-row>
+      <ion-col>
+        <ion-img [src]="productItem?.img" alt="{{productItem?.title}}"></ion-img>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <p>{{ productItem?.description }}</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-text>Color: </ion-text>
+      </ion-col>
+
+      <ion-col>
+        <ion-text>{{ productItem?.color }}</ion-text>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-text>Memory: </ion-text>
+      </ion-col>
+
+      <ion-col>
+        <ion-text>{{ productItem?.memory }}GB</ion-text>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-text>Price: </ion-text>
+      </ion-col>
+
+      <ion-col>
+        <ion-text>{{ productItem?.price }}$</ion-text>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-buttons class="ion-justify-content-between">
+          <ion-button color="danger" expand="block" fill="solid" (click)="deletePost()">
+            <ion-label>Delete</ion-label>
+            <ion-icon slot="end" name="trash-outline"></ion-icon>
+          </ion-button>
+
+          <ion-button color="primary" expand="block" fill="solid" [routerLink]="['/', 'admin-page', productItem?.id, 'edit-post']">
+            <ion-label>Edit</ion-label>
+            <ion-icon slot="end" name="create-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

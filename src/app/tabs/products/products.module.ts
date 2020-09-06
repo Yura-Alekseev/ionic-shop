@@ -16,6 +16,9 @@ import {SearchPipe} from "../../shared/search.pipe";
         IonicModule,
         ProductsPageRoutingModule
     ],
-  declarations: [ProductsPage, SearchPipe]
+    exports: [
+        SearchPipe
+    ],
+    declarations: [ProductsPage, SearchPipe]
 })
 export class ProductsPageModule {}

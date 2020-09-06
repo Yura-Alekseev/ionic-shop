@@ -1,0 +1,89 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/admin-page"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Create Post</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-list>
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating">Image URL</ion-label>
+              <ion-textarea auto-grow="true" name="img" required formControlName="img"></ion-textarea>
+            </ion-item>
+
+            <ion-item class="validation ion-no-padding" *ngIf="form.get('img').invalid && form.get('img').touched" lines="none">
+              <ion-label *ngIf="form.get('img').errors.required">Enter an image URL</ion-label>
+            </ion-item>
+
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating">Title</ion-label>
+              <ion-input type="text" name="title" required formControlName="title"></ion-input>
+            </ion-item>
+
+            <ion-item class="validation ion-no-padding" *ngIf="form.get('title').invalid && form.get('title').touched" lines="none">
+              <ion-label *ngIf="form.get('title').errors.required">Enter a title</ion-label>
+            </ion-item>
+
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating">Description</ion-label>
+              <ion-textarea auto-grow="true" name="description" required formControlName="description"></ion-textarea>
+            </ion-item>
+
+            <ion-item class="validation ion-no-padding" *ngIf="form.get('description').invalid && form.get('description').touched" lines="none">
+              <ion-label *ngIf="form.get('description').errors.required">Enter a description</ion-label>
+            </ion-item>
+
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating">Color</ion-label>
+              <ion-input type="text" name="color" required formControlName="color"></ion-input>
+            </ion-item>
+
+            <ion-item class="validation ion-no-padding" *ngIf="form.get('color').invalid && form.get('color').touched" lines="none">
+              <ion-label *ngIf="form.get('color').errors.required">Enter a color</ion-label>
+            </ion-item>
+
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating">Memory</ion-label>
+              <ion-input type="number" name="memory" required formControlName="memory"></ion-input>
+            </ion-item>
+
+            <ion-item class="validation ion-no-padding" *ngIf="form.get('memory').invalid && form.get('memory').touched" lines="none">
+              <ion-label *ngIf="form.get('memory').errors.required">Enter a memory</ion-label>
+            </ion-item>
+
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating">Price</ion-label>
+              <ion-input type="number" name="price" required formControlName="price"></ion-input>
+            </ion-item>
+
+            <ion-item class="validation ion-no-padding" *ngIf="form.get('price').invalid && form.get('price').touched" lines="none">
+              <ion-label *ngIf="form.get('price').errors.required">Enter a price</ion-label>
+            </ion-item>
+
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating">ID</ion-label>
+              <ion-input type="text" name="id" required formControlName="id"></ion-input>
+            </ion-item>
+
+            <ion-item class="validation ion-no-padding" *ngIf="form.get('id').invalid && form.get('id').touched" lines="none">
+              <ion-label *ngIf="form.get('id').errors.required">Enter an ID</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-button type="submit" color="primary" expand="block" [disabled]="form.invalid || submitted">Create</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

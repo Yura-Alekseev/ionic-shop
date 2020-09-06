@@ -1,15 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {ProductsService} from "../../services/products.service";
+import { Component, OnInit } from '@angular/core';
 import {ProductItem} from "../../shared/interfaces";
 import {Subscription} from "rxjs";
-import {ViewWillLeave} from "@ionic/angular";
+import {ProductsService} from "../../services/products.service";
+import {ViewWillEnter, ViewWillLeave} from "@ionic/angular";
 
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.page.html',
-  styleUrls: ['./products.page.scss'],
+  selector: 'app-admin-page',
+  templateUrl: './admin-page.page.html',
+  styleUrls: ['./admin-page.page.scss'],
 })
-export class ProductsPage implements OnInit, ViewWillLeave {
+export class AdminPagePage implements OnInit, ViewWillLeave, ViewWillEnter {
   productsList: ProductItem[];
   prSubs: Subscription;
   isFetching = false;
@@ -19,6 +19,14 @@ export class ProductsPage implements OnInit, ViewWillLeave {
   constructor(private productsService: ProductsService) { }
 
   ngOnInit() {
+    this.isFetching = true;
+    this.prSubs = this.productsService.getAllProducts().subscribe((items) => {
+      this.productsList = items;
+      this.isFetching = false;
+    });
+  }
+
+  ionViewWillEnter() {
     this.isFetching = true;
     this.prSubs = this.productsService.getAllProducts().subscribe((items) => {
       this.productsList = items;

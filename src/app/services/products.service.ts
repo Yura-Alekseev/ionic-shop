@@ -13,7 +13,7 @@ export class ProductsService {
   constructor(private http: HttpClient) { }
 
   getAllProducts(): Observable<ProductItem[]> {
-    return this.http.get(`${environment.fbDbUrl}/products.json`)
+    return this.http.get(`${environment.firebase.databaseURL}/products.json`)
         .pipe(
             map((response: {[key: string]: any}) => {
               return Object.keys(response)
@@ -25,7 +25,7 @@ export class ProductsService {
   }
 
   getItemById(id: string): Observable<ProductItem> {
-      return this.http.get(`${environment.fbDbUrl}/products/${id}.json`)
+      return this.http.get(`${environment.firebase.databaseURL}/products/${id}.json`)
           .pipe(
               map((item: ProductItem) => {
               return {

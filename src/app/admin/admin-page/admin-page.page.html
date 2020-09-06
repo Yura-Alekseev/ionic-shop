@@ -4,20 +4,19 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
 
-    <ion-title>Products</ion-title>
+    <ion-title>Admin Page</ion-title>
 
     <ion-buttons slot="end">
       <ion-button color="primary" expand="block" fill="clear" (click)="sortByPrice()">
         <ion-label *ngIf="highPrice">Low to high</ion-label>
-<!--        <ion-icon *ngIf="!highPrice" name="chevron-up-outline"></ion-icon>-->
+        <!--        <ion-icon *ngIf="!highPrice" name="chevron-up-outline"></ion-icon>-->
 
         <ion-label *ngIf="!highPrice">High to low</ion-label>
-<!--        <ion-icon *ngIf="highPrice" name="chevron-down-outline"></ion-icon>-->
+        <!--        <ion-icon *ngIf="highPrice" name="chevron-down-outline"></ion-icon>-->
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
 
 <ion-content>
   <!--<p *ngIf="isFetching" class="ion-text-center">Loading...</p>-->
@@ -28,6 +27,15 @@
   <ion-grid *ngIf="!isFetching">
     <ion-row>
       <ion-col>
+        <ion-button fill="clear" [routerLink]="['/', 'create-post']">
+          <ion-label>Create new post</ion-label>
+          <ion-icon slot="end" name="add-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
         <ion-searchbar [(ngModel)]="searchStr"></ion-searchbar>
       </ion-col>
     </ion-row>
@@ -36,7 +44,7 @@
       <ion-col>
         <ion-list>
           <ion-item *ngFor="let item of productsList | searchProducts: searchStr"
-                    [routerLink]="['/', 'products', item.id]"
+                    [routerLink]="['/', 'admin-page', item.id]"
                     detail
           >
             <ion-thumbnail slot="start">

@@ -10,5 +10,4 @@ export interface Environment {
     };
     returnSecureToken?: boolean;
     production: boolean;
-    fbDbUrl: string;
 }

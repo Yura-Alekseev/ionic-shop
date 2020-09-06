@@ -9,7 +9,7 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row>
+    <ion-row *ngIf="userPhoto !== null">
       <ion-col class="avatar-wrapper">
         <ion-avatar class="avatar">
           <ion-img [src]="userPhoto"></ion-img>

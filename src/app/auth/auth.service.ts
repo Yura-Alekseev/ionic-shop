@@ -38,7 +38,6 @@ export class AuthService {
         );
   }
 
-
   doLogout() {
     this.setToken(null);
   }
@@ -88,10 +87,14 @@ export class AuthService {
     });
   }
 
-
-
   isAuthenticated(): boolean {
     return !!this.token;
+  }
+
+  isAdmin(): boolean {
+    if (localStorage.getItem('admin') === 'true') {
+      return true;
+    }
   }
 
   private setToken(response: FbAuthResponse | null) {
@@ -102,6 +105,7 @@ export class AuthService {
       localStorage.removeItem('userName');
       localStorage.removeItem('cart');
       localStorage.removeItem('userPhoto');
+      localStorage.removeItem('admin');
     }
 
   }
@@ -114,6 +118,7 @@ export class AuthService {
       localStorage.removeItem('userName');
       localStorage.removeItem('cart');
       localStorage.removeItem('userPhoto');
+      localStorage.removeItem('admin');
     }
   }
 
@@ -125,6 +130,7 @@ export class AuthService {
       localStorage.removeItem('userName');
       localStorage.removeItem('cart');
       localStorage.removeItem('userPhoto');
+      localStorage.removeItem('admin');
     }
   }
 
