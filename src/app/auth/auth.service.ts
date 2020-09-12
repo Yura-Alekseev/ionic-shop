@@ -6,6 +6,7 @@ import {catchError, tap} from "rxjs/operators";
 import {environment} from "../../environments/environment";
 import {AngularFireAuth} from '@angular/fire/auth';
 import * as firebase from "firebase/app";
+import UserCredential = firebase.auth.UserCredential;
 
 @Injectable({
   providedIn: 'root'
@@ -73,10 +74,9 @@ export class AuthService {
   doFacebookAuth() {
     return new Promise<any>((resolve, reject) => {
       const provider = new firebase.auth.FacebookAuthProvider();
-      /*provider.addScope('displayName');*/
       firebase.auth()
           .signInWithPopup(provider)
-          .then((response) => {
+          .then((response: UserCredential) => {
             localStorage.setItem('userName', response.user.displayName);
             localStorage.setItem('userPhoto', response.user.photoURL);
             this.setTokenFacebook(response);
