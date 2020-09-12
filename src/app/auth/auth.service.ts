@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {FacebookAuthResponse, FbAuthResponse, GoogleAuthResponse, User} from "../shared/interfaces";
 import {Observable, Subject, throwError} from "rxjs";
-import {catchError, tap} from "rxjs/operators";
+import {catchError, map, tap} from "rxjs/operators";
 import {environment} from "../../environments/environment";
 import {AngularFireAuth} from '@angular/fire/auth';
 import * as firebase from "firebase/app";
@@ -36,6 +36,18 @@ export class AuthService {
         .pipe(
             tap(this.setToken),
             catchError(this.handleError.bind(this))
+        );
+  }
+
+  doAdminCheck(): Observable<User> {
+    return this.http.get(`${environment.firebase.databaseURL}/admin.json`)
+        .pipe(
+            map((user: User) => {
+              return {
+                ...user,
+                email: user.email
+              }
+            })
         );
   }
 
@@ -110,7 +122,7 @@ export class AuthService {
 
   }
 
-  private setTokenGoogle(response: GoogleAuthResponse | null) {
+  private setTokenGoogle(response) {
     if (response) {
       localStorage.setItem('fb-token', response.credential.idToken);
     } else {
@@ -122,7 +134,7 @@ export class AuthService {
     }
   }
 
-  private setTokenFacebook(response: FacebookAuthResponse | null) {
+  private setTokenFacebook(response) {
     if (response) {
       localStorage.setItem('fb-token', response.credential.accessToken);
     } else {

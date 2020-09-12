@@ -47,13 +47,21 @@ export class AdminLoginPage implements OnInit {
       password: this.form.value.password
     };
 
-    this.auth.doLogin(user).subscribe(() => {
-      this.form.reset();
-      localStorage.setItem('admin', 'true');
-      this.router.navigate(['/admin-page']);
-      this.submitted = false;
-    }, () => {
-      this.submitted = false;
+    this.auth.doAdminCheck().subscribe((admin: User) => {
+      if (admin.email === user.email) {
+        this.auth.doLogin(user).subscribe(() => {
+          this.form.reset();
+          localStorage.setItem('admin', 'true');
+          this.router.navigate(['/admin-page']);
+          this.submitted = false;
+        }, () => {
+          this.submitted = false;
+        });
+      } else {
+        this.form.reset();
+        this.errorMessage = 'You don\'t have access';
+        this.submitted = false;
+      }
     });
   }
 }

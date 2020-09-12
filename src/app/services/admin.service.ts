@@ -4,6 +4,7 @@ import {ProductItem, User} from "../shared/interfaces";
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 import * as firebase from "firebase";
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
