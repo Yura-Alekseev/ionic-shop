@@ -7,14 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { PostPageRoutingModule } from './post-routing.module';
 
 import { PostPage } from './post.page';
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
-import {AuthInterceptor} from "../../auth/auth.interceptor";
-
-const INTERCEPTOR_PROVIDER: Provider = {
-  provide: HTTP_INTERCEPTORS,
-  multi: true,
-  useClass: AuthInterceptor
-};
 
 @NgModule({
   imports: [
@@ -23,9 +15,6 @@ const INTERCEPTOR_PROVIDER: Provider = {
     IonicModule,
     PostPageRoutingModule
   ],
-  declarations: [PostPage],
-  providers: [
-    INTERCEPTOR_PROVIDER
-  ]
+  declarations: [PostPage]
 })
 export class PostPageModule {}

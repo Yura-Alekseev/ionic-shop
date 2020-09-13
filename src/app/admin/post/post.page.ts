@@ -4,9 +4,6 @@ import {Subscription} from "rxjs";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {NavController, ViewWillEnter, ViewWillLeave} from "@ionic/angular";
 import {ProductsService} from "../../services/products.service";
-import {FavoriteService} from "../../services/favorite.service";
-import {CartService} from "../../services/cart.service";
-import {AuthService} from "../../auth/auth.service";
 import {switchMap} from "rxjs/operators";
 import {AdminService} from "../../services/admin.service";
 
@@ -58,9 +55,14 @@ export class PostPage implements OnInit, ViewWillEnter, ViewWillLeave {
     }
   }
 
-  deletePost() {
+  /*deletePost() {
     this.adminService.deletePost(this.productItem.id).subscribe(() => {
       this.router.navigateByUrl('/admin-page');
     });
+  }*/
+
+  deletePost() {
+    this.adminService.deletePost(this.productItem.id);
+    this.router.navigateByUrl('/admin-page');
   }
 }

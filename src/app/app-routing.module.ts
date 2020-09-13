@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import {AuthGuard} from "./auth/auth.guard";
+import {AdminAuthGuard} from "./auth/admin-auth.guard"
 
 const routes: Routes = [
   {
@@ -47,7 +48,8 @@ const routes: Routes = [
   },
   {
     path: 'admin-page',
-    loadChildren: () => import('./admin/admin-page/admin-page.module').then(m => m.AdminPagePageModule)
+    loadChildren: () => import('./admin/admin-page/admin-page.module').then(m => m.AdminPagePageModule),
+    canActivate: [AdminAuthGuard]
   },
   {
     path: 'admin-login',
@@ -55,15 +57,18 @@ const routes: Routes = [
   },
   {
     path: 'edit-post',
-    loadChildren: () => import('./admin/edit-post/edit-post.module').then(m => m.EditPostPageModule)
+    loadChildren: () => import('./admin/edit-post/edit-post.module').then(m => m.EditPostPageModule),
+    canActivate: [AdminAuthGuard]
   },
   {
     path: 'create-post',
-    loadChildren: () => import('./admin/create-post/create-post.module').then(m => m.CreatePostPageModule)
+    loadChildren: () => import('./admin/create-post/create-post.module').then(m => m.CreatePostPageModule),
+    canActivate: [AdminAuthGuard]
   },
   {
     path: 'post',
-    loadChildren: () => import('./admin/post/post.module').then(m => m.PostPageModule)
+    loadChildren: () => import('./admin/post/post.module').then(m => m.PostPageModule),
+    canActivate: [AdminAuthGuard]
   },
   {
     path: '**',

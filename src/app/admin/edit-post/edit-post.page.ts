@@ -92,7 +92,7 @@ export class EditPostPage implements OnInit, ViewWillEnter, ViewWillLeave {
       id: this.form.value.id,
     };
 
-    this.adminService.createPost(post);
+    this.adminService.updatePost(post);
     this.submitted = false;
     this.form.reset();
     this.router.navigateByUrl('/admin-page/' + this.productItem.id);
